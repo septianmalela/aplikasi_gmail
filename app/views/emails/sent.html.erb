@@ -1,0 +1,32 @@
+<br>
+<h2>History Pengiriman <%=current_user.name%></h2>
+		<table id="example" class="display" style="width:100%">
+		  <thead>
+		    <tr>
+		      <th scope="col">No</th>
+		      <th scope="col">Penerima</th>
+		      <th scope="col">Subject</th>
+		      <th scope="col">tgl/jam dikirim</th>
+		      <th scope="col">Lihat Pesan</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <% i = 0 %>
+		      <% @email.each do |s| %>
+		      	<% if user_signed_in? %>
+	          	  <% if current_user.id == s.user_id %>
+	          	  	<% if (s.status == 'trash' || s.status == 'sent') %>
+					    <tr>
+						      <th scope="row"><%= i+=1 %></th>
+						      <td><%= s.recipients %></td>
+						      <td><%= s.subject %></td>
+                  			  <td><%= s.updated_at.strftime("%d %B,%Y %H:%M") %></td>
+                  			  <td><%= link_to "Lihat Pesan", email_path(s), class: 'btn btn-primary' %></td>
+
+					    </tr>
+				  	<%end%>
+				  <%end%>
+			    <% end %>
+		      <% end %>
+		  </tbody>
+		</table>

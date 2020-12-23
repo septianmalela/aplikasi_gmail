@@ -1,0 +1,32 @@
+<%= form_for @email, html: { multipart: true } do |f| %><br>
+<div class="form-group">
+	
+	<%= f.label :recipients %>
+	<%= f.email_field :recipients, class: 'form-control col-md-5' %>
+
+</div><br>
+
+<div class="form-group">
+	
+	<%= f.label :subject %>
+	<%= f.text_field :subject, class: 'form-control col-md-5' %>
+
+</div><br>
+
+<div class="form-group">
+	
+	<%= f.label :message %>
+	<%= f.text_area :message, rows: 10, class: 'form-control col-md-5' %>
+
+</div><br>
+
+<div class="form-group">
+	<%= f.label :attachment %>
+    <%= f.file_field :attachment, class: 'form-control col-md-5' %>
+</div>
+
+<div class="form-group">
+	<%= f.submit "Kirim Pesan", value:'sent', class: 'btn btn-primary form-control col-md-2' %>
+	<%= f.submit "Simpan Ke Draft", value:'draft', class: 'btn btn-primary form-control col-md-2' %>
+</div>
+<% end %>

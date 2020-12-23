@@ -1,0 +1,27 @@
+<% if user_signed_in? %>
+<div class="table-responsive-md">
+    <div class="col-md-10"><br>
+    	<table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nama</th>
+          <th scope="col">Email</th>
+          <th scope="col">Foto</th>
+          <th scope="col">action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if user_signed_in? %>
+        <tr>
+          <td><%= current_user.name %></td>
+          <td><%= current_user.email %></td>
+          <td scope="row"><%= image_tag current_user.avatar.url unless current_user.avatar.nil? %></td>
+          <td><%= link_to "Edit", edit_user_registration_path, class: 'btn btn-warning' %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<% else %><br>
+<% end %>

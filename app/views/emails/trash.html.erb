@@ -1,0 +1,35 @@
+<br>
+<h2>History Trash <%= current_user.name %></h2>
+
+	<table id="example" class="display" style="width:100%">
+	  <thead>
+	    <tr>
+	      <th scope="col">No</th>
+	      <th scope="col">penerima</th>
+	      <th scope="col">Subject</th>
+	      <th scope="col">status</th>
+	      <th scope="col">tgl/jam ke trash</th>
+	      <th scope="col">Action</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <% i = 0 %>
+	      <% @email.each do |s| %>
+	      	<% if user_signed_in? %>
+          	  <% if current_user.email == s.recipients %>
+          	  	<% if s.status == 'trash' %>
+				    <tr>
+					      <th scope="row"><%= i+=1 %></th>
+					      <td><%= s.recipients %></td>
+					      <td><%= s.subject %></td>
+					      <td><%= s.status %></td>
+                  		  <td><%= s.updated_at.strftime("%d %B,%Y %H:%M") %></td>
+                  		  <td><%= link_to "Lihat Pesan", email_path(s), class: 'btn btn-primary' %> <%= button_to "Delete", delete_trash_email_path(s), method: :patch, class: 'btn btn-danger' %></td>
+
+				    </tr>
+			  	<%end%>
+			  <%end%>
+		    <% end %>
+	      <% end %>
+	  </tbody>
+	</table>

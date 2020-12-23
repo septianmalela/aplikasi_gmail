@@ -1,0 +1,68 @@
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading list-group-item bg-secondary">EMAIL</div>
+      <div class="list-group list-group-flush">
+        <% if user_signed_in? %>
+        <%= link_to 'Inbox', emails_path, class: 'list-group-item list-group-item-action bg-light' %>
+        <%= link_to 'Sent', sent_emails_path, class: 'list-group-item list-group-item-action bg-light' %>
+        <%= link_to 'trash', trash_emails_path , class: 'list-group-item list-group-item-action bg-light' %>
+        <%= link_to 'draft', draft_emails_path , class: 'list-group-item list-group-item-action bg-light' %>
+        <% end %>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-secondary" id="menu-toggle">Menu</button>&nbsp;&nbsp;&nbsp;
+        <% if user_signed_in? %>
+        <%= link_to "Create New Pesan", new_email_path, class: 'btn btn-secondary'%>
+        <% end %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <% if user_signed_in? %>
+              <%= link_to 'Profile',home_index_path ,class: 'navbar-brand' %>
+              <% end %>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= user_signed_in? ? current_user.name : "Hallo Guest" %>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <% if user_signed_in? %>
+                    <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+                <% else %>
+                    <%= link_to 'Daftar', new_user_registration_path, class: 'dropdown-item' %>
+                    <%= link_to 'Login', new_user_session_path, class: 'dropdown-item' %>
+                <% end %>
+                <div class="dropdown-divider"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="">
+        <div class="container-fluid">
+            <% flash.each do |key, value| %>
+              <div class="alert alert-primary" <%= key %> >
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <%= value %>
+               </div>
+            <% end %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
