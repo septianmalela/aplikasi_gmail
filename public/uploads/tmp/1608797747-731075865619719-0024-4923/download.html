@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GainYourAbility</title>
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="UFXq4QS3WvesRquEHMMM0fFAFX8dOSC/sBNDySOsTSK+BJbnYny3ZUpEzRGgSH46SLH+HA7wqlc+k3lOr1C3cA==" />
+    
+    <meta charset="utf-8">
+    <meta name="author" content="99pixel" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" media="screen" href="/assets/application-6a114e3660360d052f9d8cc70b5709993e3b509ef374eacb746011c6759df812.css" />
+    <script src="/assets/application-b59c6147b72f264a8c3221286324a53aca7fc8e65e435154f9ab5af05f67dc01.js"></script>
+  </head>
+
+  <body class="text-white">
+    <div class="container">
+<form class="user-exercise" action="/users/exercises" accept-charset="UTF-8" data-remote="true" method="post"><input type="hidden" name="authenticity_token" value="x9++opQAr72hIIPnF4tACuOevsGDwCu9jLdrEMSsbDR5FL8oyzNiTg29TLJfF4mrPzVEkmMrA1jIbCKb3PUZsA==" />
+  <div class="row">
+    <div class="col-md-10">
+      <div class="quest-box">
+        <div class="quest-header">
+          <h1>Rails Exam - Create Project dan Devise User</h1>
+          <div class="embed-box">
+            <div class="video-embed">
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FjvAvLP_Lac?controls=0&disablekb=1&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0&loop=1&modestbranding=1&autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="quest-body">
+          <div class="quest-item">
+            <div class="quest-text">
+              <span class="quest-number"></span><p class="quest-question">Ikutilah langkah - langkah seperti video materi diatas, lalu upload project-nya ke Github (dengan visibility PUBLIC). Project tersebut akan menjadi latihan kita selama mengikuti Gameplay ini!</p>
+            </div>
+            <div class="project-input">
+              <input type="text" class="project-url" name="exercise[ans_project]" placeholder="Project URL">
+            </div>
+          </div>
+        </div>
+        <div class="quest-footer">
+          <button class="btn btn-success" data-toggle="modal" onclick="return false" data-target="#confirm-modal">Submit</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="control-wrapper">
+        <div class="timer">
+          <div id="timer"><span class="time-value">00:00:00</span></div>
+        </div>
+        <div class="quest-map">
+          <h6 class="text-center">Question Map</h6>
+          <div class="quest-map-number">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input name="exercise[status]" type="hidden" value="in_progress" id="status">
+  <input name="exercise[train_id]" type="hidden" value="126">
+  <input name="exercise[quest_id]" type="hidden" value="466">
+  <input name="exercise[duration]" type="hidden" class="timer" value="0">
+</form></div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered dark-modal" role="document">
+    <div class="modal-content">
+      <button type="button" class="close text-white btn-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+        <p>Are you sure want to submit?</p>
+        <div>
+          <button class="btn btn-success mr-3 submit">Yes</button>
+          <button class="btn btn-danger" data-dismiss="modal" aria-label="Close">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  window.addEventListener('beforeunload', preventClose);
+
+  function preventClose(event) {
+    event.preventDefault();
+    event.returnValue = ''; // For Chrome
+
+    // Submit form when user try to leave
+    // $("form.user-exercise").submit();
+  }
+</script>
+  </body>
+</html>

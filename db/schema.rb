@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_23_063233) do
+ActiveRecord::Schema.define(version: 2020_12_24_105846) do
 
   create_table "emails", charset: "utf8mb4", force: :cascade do |t|
     t.string "recipients"
@@ -21,11 +21,16 @@ ActiveRecord::Schema.define(version: 2020_12_23_063233) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "attachment", size: :long, collation: "utf8mb4_bin"
-    t.check_constraint "json_valid(`attachment`)", name: "attachment"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "post_attachments", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "email_id"
+    t.string "attachment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

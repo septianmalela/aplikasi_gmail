@@ -10,26 +10,40 @@ class EmailsController < ApplicationController
 
   def new
   	@email = Email.new
+    @post_attachment = @email.post_attachments.build
   end
 
   def create
-
   	@email = Email.new(resource_params)
   	@email.user = current_user
+    @user = User.all
   	@email.status = params[:commit]
-    	if @email.save
-    		flash[:notice] = "Anda Berhasil Mengirim Email Ke '#{@email.recipients}' "
-    		redirect_to root_path
-    	else
-      flash[:notice] = "Email yang dituju tidak ada!!"
-      @email.delete
-      redirect_to new_email_path
-    	end
+    
+     if @email.save == User.exists?( email: @email.recipients )
+       params[:post_attachments]['attachment'].each do |a|
+          @post_attachment = @email.post_attachments.create!(:attachment => a, :email_id => @email.id)
+       end
+       flash[:notice] = "Anda Berhasil Mengirim Email Ke '#{@email.recipients}' "
+       redirect_to root_path
+     else
+       flash[:notice] = "Email yang dituju tidak ada!!"
+       @email.delete
+       redirect_to new_email_path
+     end
+
+    	# if @email.save == User.exists?( email: @email.recipients )
+     #  		flash[:notice] = "Anda Berhasil Mengirim Email Ke '#{@email.recipients}' "
+     #  		redirect_to root_path
+    	# else
+     #  flash[:notice] = "Email yang dituju tidak ada!!"
+     #  @email.delete
+     #  redirect_to new_email_path
+    	# end
 
   end
 
   def show
-  	@email = Email.find(params[:id])
+  	@post_attachments = @email.post_attachments.all
   end
 
   def sent
@@ -85,7 +99,8 @@ class EmailsController < ApplicationController
   private
 
   def resource_params
-		params.require(:email).permit(:recipients, :subject, :message, :attachment)
+		params.require(:email).permit(:recipients, :subject, :message, post_attachments_attributes: 
+  [:id, :email_id, :attachment])
   end
 
   def set_trash
