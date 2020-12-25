@@ -1,4 +1,4 @@
-<%= form_for(@email) do |e| %><br>
+<%= form_for(@email, :html => { :multipart => true }) do |e| %><br>
 <div class="form-group">
 	
 	<%= e.label :recipients %>
@@ -20,8 +20,15 @@
 
 </div><br>
 
+<%= fields_for :post_attachments do |p| %>
+     <div class="field">
+       <%= p.label :attachment %><br>
+       <%= p.file_field :attachment, :multiple => true, name: "post_attachments[attachment][]" %>
+     </div>
+   <% end %>
 <div class="form-group">
 	<%= e.submit "Kirim Pesan", class: 'btn btn-primary form-control col-md-2' %>
 </div>
+
 
 <% end %>

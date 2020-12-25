@@ -19,16 +19,21 @@ class EmailsController < ApplicationController
     @user = User.all
   	@email.status = params[:commit]
     
-     if @email.save == User.exists?( email: @email.recipients )
-       params[:post_attachments]['attachment'].each do |a|
-          @post_attachment = @email.post_attachments.create!(:attachment => a, :email_id => @email.id)
-       end
-       flash[:notice] = "Anda Berhasil Mengirim Email Ke '#{@email.recipients}' "
-       redirect_to root_path
+     if @email.save
+      if (@email.status == 'sent' && User.exists?( email: @email.recipients ))
+         params[:post_attachments]['attachment'].each do |a|
+            @post_attachment = @email.post_attachments.create!(:attachment => a, :email_id => @email.id)
+         end
+         flash[:notice] = "Anda Berhasil Mengirim Email Ke '#{@email.recipients}' "
+         redirect_to root_path
+       else
+        flash[:notice] = "Email Masuk Ke Draft"
+        redirect_to draft_emails_path
+      end
      else
-       flash[:notice] = "Email yang dituju tidak ada!!"
-       @email.delete
-       redirect_to new_email_path
+         flash[:notice] = "Email yang dituju tidak ada!!"
+         @email.delete
+         redirect_to root_path
      end
 
     	# if @email.save == User.exists?( email: @email.recipients )
@@ -43,7 +48,8 @@ class EmailsController < ApplicationController
   end
 
   def show
-  	@post_attachments = @email.post_attachments.all
+  	@email = Email.friendly.find(params[:id])
+    @post_attachments = @email.post_attachments.all
   end
 
   def sent
@@ -60,7 +66,7 @@ class EmailsController < ApplicationController
   end
 
   def move_trash
-  	emails = Email.find(params[:id])
+  	emails = Email.friendly.find(params[:id])
   	emails.update_attribute(:status, "trash")
 
   	if emails.save
@@ -72,20 +78,23 @@ class EmailsController < ApplicationController
   end
 
   def edit
-    @email = Email.find(params[:id])
+    @email = Email.friendly.find(params[:id])
   end
 
   def update
-    @email = Email.find(params[:id])
+    @email = Email.friendly.find(params[:id])
       @email.update(resource_params)
       @email.update(status: 'sent')
-      flash[:notice] = "Update Draft Succes"
+      params[:post_attachments]['attachment'].each do |a|
+          @post_attachment = @email.post_attachments.create!(:attachment => a, :email_id => @email.id)
+        end
+      flash[:notice] = "Update Draft Succes, Email sent to '#{@email.recipients}' "
 
       redirect_to root_path
   end
 
   def delete_trash
-    email = Email.find(params[:id])
+    email = Email.friendly.find(params[:id])
     email.update_attribute(:status, "delete")
 
     if email.save

@@ -7,6 +7,9 @@
 	<h5> To <a style="padding-left: 60px;"></a>: <%= @email.recipients %> </h5><br><br>
 	<h5> Message : <%= @email.message %> </h5>
 	<h5>File <a style="padding-left: 50px;"></a> :  </h5><br>
+	<% @post_attachments.each do |p| %>
+	  <%= image_tag p.attachment_url %>
+	<% end %>
 	<% if @email.status == 'trash' %>
 	<h5> Status <a style="padding-left: 25px;"></a> : <%=@email.status%> </h5>
 	<% end %>
