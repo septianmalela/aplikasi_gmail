@@ -1,0 +1,34 @@
+<%= form_with(model: @email, url: emails_path, :html => { :multipart => true }, method: :post) do |f| %><br>
+<div class="form-group">
+  
+  <%= f.label :recipients %>
+  <%= f.email_field :recipients, class: 'form-control' %>
+
+</div><br>
+
+<div class="form-group">
+  
+  <%= f.label :subject %>
+  <%= f.text_field :subject, class: 'form-control' %>
+
+</div><br>
+
+<div class="form-group">
+  
+  <%= f.label :message %>
+  <%= f.text_area :message, rows: 10, class: 'form-control' %>
+
+</div><br>
+
+<%= f.fields_for :post_attachments do |p| %>
+     <div class="field">
+       <%= p.label :attachment %><br>
+       <%= p.file_field :attachment, :multiple => true, name: "post_attachments[attachment][]" %>
+     </div>
+   <% end %>
+
+<div class="form-group">
+  <%= f.submit "Kirim Pesan", value:'sent', class: 'btn btn-primary form-control' %>
+  <%= f.submit "Simpan Ke Draft", value:'draft', class: 'btn btn-primary form-control' %>
+</div>
+<% end %>
