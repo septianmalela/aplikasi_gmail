@@ -7,25 +7,21 @@
 		      <th scope="col">Penerima</th>
 		      <th scope="col">Subject</th>
 		      <th scope="col">tgl/jam ke draft</th>
+		      <th scope="col">Pengirim</th>
 		      <th scope="col">Action</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		    <% i = 0 %>
-		      <% @email.each do |s| %>
-		      	<% if user_signed_in? %>
-	          	  <% if current_user.id == s.user_id %>
-	          	  	<% if (s.status == 'draft') %>
+		      <% @draft.each do |s| %>
 					    <tr>
 						      <th scope="row"><%= i+=1 %></th>
 						      <td><%= s.recipients %></td>
 						      <td><%= s.subject %></td>
                   		  	  <td><%= s.updated_at.strftime("%d %B,%Y %H:%M") %></td>
+ 	                 		  <td><%= current_user.email %> </td>
                   		  	  <td><%= link_to "Edit Draft", edit_email_path(s.id), method: :patch,class: 'btn btn-warning' %></td>
 					    </tr>
-				  	<%end%>
-				  <%end%>
-			    <% end %>
 		      <% end %>
 		  </tbody>
 		</table>

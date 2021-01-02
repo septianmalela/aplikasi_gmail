@@ -6,7 +6,6 @@ class CreateEmails < ActiveRecord::Migration[6.1]
       t.text :message
       t.string :inbox
       t.string :status
-      t.boolean :starred
       t.integer :user_id
 
       t.timestamps

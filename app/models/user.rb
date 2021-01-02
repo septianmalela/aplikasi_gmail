@@ -11,5 +11,10 @@ class User < ApplicationRecord
   validates :avatar, presence: true
   has_many :emails
 
+      default_scope { order({id: :desc}, :created_at) }
+      scope :draft, -> { where(status: 'draft') }
+      scope :inbox, -> { where(status: 'sent') }
+      scope :trash, -> { where(status: 'trash') }
+      scope :sent, -> { where(status: 'sent').or(where(status: 'trash')).or(where(status: 'delete')) }
 
 end

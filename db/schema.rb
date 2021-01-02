@@ -10,14 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_25_065242) do
+ActiveRecord::Schema.define(version: 2020_12_30_061751) do
+
+  create_table "email_users", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "email_id"
+    t.string "recepients"
+    t.string "subject"
+    t.boolean "read", default: false
+    t.string "status", default: "inbox"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "emails", charset: "utf8mb4", force: :cascade do |t|
     t.string "recipients"
     t.string "subject"
     t.text "message"
     t.string "status"
-    t.boolean "starred"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

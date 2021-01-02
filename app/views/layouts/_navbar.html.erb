@@ -20,9 +20,11 @@
       <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <button class="btn btn-secondary" id="menu-toggle">Menu</button>&nbsp;&nbsp;&nbsp;
         <% if user_signed_in? %>
-          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="static" data-keyboard="false">
+          <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="static" data-keyboard="false">
             New Message
-          </button>
+          </button> -->
+
+          <%= link_to "New Message", new_email_path, class: 'btn btn-secondary' %>
           <a></a>
 
         <% end %>
