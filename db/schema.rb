@@ -14,8 +14,7 @@ ActiveRecord::Schema.define(version: 2020_12_30_061751) do
 
   create_table "email_users", charset: "utf8mb4", force: :cascade do |t|
     t.integer "email_id"
-    t.string "recepients"
-    t.string "subject"
+    t.string "recipients"
     t.boolean "read", default: false
     t.string "status", default: "inbox"
     t.datetime "created_at", precision: 6, null: false
@@ -23,7 +22,6 @@ ActiveRecord::Schema.define(version: 2020_12_30_061751) do
   end
 
   create_table "emails", charset: "utf8mb4", force: :cascade do |t|
-    t.string "recipients"
     t.string "subject"
     t.text "message"
     t.string "status"

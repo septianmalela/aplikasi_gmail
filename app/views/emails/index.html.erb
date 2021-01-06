@@ -1,4 +1,4 @@
-<table id="example" class="display" style="width:100%"><br>
+<table id="example" class="display" style="width:100%">
 <h3>Inbox</h3>
   <thead>
     <tr>
@@ -13,18 +13,14 @@
   <tbody>
     <% i = 0 %>
     <% @email.each do |p| %>
-      <% if user_signed_in? %>
-          <% if current_user.email == p.recipients %>
                 <tr>
                   <th scope="row"><%= i+=1 %></th>
                   <td><%= p.recipients %> </td>
                   <td><%= p.subject %></td>
                   <td><%= p.updated_at.strftime("%d %B,%Y %H:%M") %></td>
-                  <td> <%= p.user.email %> </td>
-                  <td><%= link_to "Lihat Pesan", email_path(p), class: 'btn btn-primary' %> <%= button_to "Trash", move_trash_email_path(p), method: :patch, class: 'btn btn-danger'  %> </td>
+                  <td><%= p.user.email %> </td>
+                  <td><%= link_to "Lihat Pesan", (p), class: 'btn btn-primary' %> <%= button_to "Trash", move_trash_email_path(p), method: :patch, class: 'btn btn-danger'  %> </td>
                 </tr>
-          <% end %>
-      <% end %>
     <% end %>
   </tbody>
 </table>

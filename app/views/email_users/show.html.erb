@@ -1,0 +1,14 @@
+<h2>Show Email</h2><br>
+<div class="recipients">
+	<h4>-----------Message-----------</h4>
+	<h5> From <a style="padding-left: 38px;">: <b> <%= @user.name %></b>  < <%= @user.email %> > </a> </h5>
+	<h5> Date <a style="padding-left: 41px;"></a>: <%= @emails.updated_at.strftime("%d %B, %Y %H:%M") %></h5>
+	<h5> Subject <a style="padding-left: 23px;"></a>: <%= @email.subject %> </h5>
+	<h5> To <a style="padding-left: 58px;"></a>: <%= @emails.recipients %> </h5><br><br>
+	<h5> Message <a style="padding-left: 13px;"></a>: <%= @email.message %> </h5>
+	<h5>Photo <a style="padding-left: 35px;"></a> :  </h5><br>
+	<% @post_attachments.each do |p| %>
+	  <%= image_tag p.attachment_url %>
+	<% end %>
+</div>
+	

@@ -1,10 +1,8 @@
-<br>
 <h2>History Pengiriman <%=current_user.name%></h2>
 		<table id="example" class="display" style="width:100%">
 		  <thead>
 		    <tr>
 		      <th scope="col">No</th>
-		      <th scope="col">Penerima</th>
 		      <th scope="col">Subject</th>
 		      <th scope="col">tgl/jam dikirim</th>
 		      <th scope="col">Pengirim</th>
@@ -14,15 +12,13 @@
 		  <tbody>
 		    <% i = 0 %>
 		      <% @sent.each do |s| %>
-					    <tr>
-						      <th scope="row"><%= i+=1 %></th>
-						      <td><%= s.recipients %></td>
-						      <td><%= s.subject %></td>
-                  			  <td><%= s.updated_at.strftime("%d %B,%Y %H:%M") %></td>
-                  			  <td><%= current_user.email %> </td>
-                  			  <td><%= link_to "Lihat Pesan", email_path(s), class: 'btn btn-primary' %></td>
-
-					    </tr>
+					<tr>
+						  <th scope="row"><%= i+=1 %></th>
+						  <td><%= s.subject %></td>
+                  		  <td><%= s.updated_at.strftime("%d %B,%Y %H:%M") %></td>
+                  		  <td><%= current_user.email %> </td>
+                  		  <td><%= link_to "Lihat Pesan", email_path(s), class: 'btn btn-primary' %> <%= button_to "Trash", email_path(s), method: :delete, class: 'btn btn-danger'  %></td>
+					</tr>
 		      <% end %>
 		  </tbody>
 		</table>

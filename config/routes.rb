@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   resources :post_attachments
+  resources :email_users
   devise_for :users
-  root 'emails#index'
+  root 'email_users#index'
   get 'home/index'
   get 'home/show'
   resources :emails do

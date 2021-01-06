@@ -5,7 +5,7 @@
       <div class="sidebar-heading list-group-item bg-secondary">EMAIL</div>
       <div class="list-group list-group-flush">
         <% if user_signed_in? %>
-        <%= link_to 'Inbox', emails_path, class: 'list-group-item list-group-item-action bg-light' %>
+        <%= link_to 'Inbox', email_users_path, class: 'list-group-item list-group-item-action bg-light' %>
         <%= link_to 'Sent', sent_emails_path, class: 'list-group-item list-group-item-action bg-light' %>
         <%= link_to 'trash', trash_emails_path , class: 'list-group-item list-group-item-action bg-light' %>
         <%= link_to 'draft', draft_emails_path , class: 'list-group-item list-group-item-action bg-light' %>
@@ -57,10 +57,10 @@
         </div>
       </nav>
 
-      <div class="">
+      <div class=""><br>
         <div class="container-fluid">
             <% flash.each do |key, value| %>
-              <div class="alert alert-primary" <%= key %> >
+              <div class="alert alert-primary col-md-5" <%= key %> >
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <%= value %>
                </div>
