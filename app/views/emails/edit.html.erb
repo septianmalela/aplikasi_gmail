@@ -1,9 +1,7 @@
 <%= form_for(@email, :html => { :multipart => true }) do |e| %><br>
 
-<%= e.fields_for :email_users do |form| %>
-	<%= form.label :recipients %>
-	<%= form.email_field :recipients , class: 'form-control col-md-5' %>
-<% end %><br>
+	<%= e.label :recipients %>
+	<%= e.text_field :recipients , class: 'form-control col-md-5' %>
 
 <div class="form-group">
 	

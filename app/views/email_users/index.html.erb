@@ -3,7 +3,8 @@
   <thead>
     <tr>
       <th scope="col">No</th>
-      <th scope="col">recepients</th>
+      <th scope="col">Pengirim</th>
+      <th scope="col">Subject</th>
       <th scope="col">tgl/jam diterima</th>
       <th scope="col">Action</th>
     </tr>
@@ -11,9 +12,10 @@
   <tbody>
     <% i = 0 %>
     <% @emails.each do |p| %>
-        <tr>
+        <tr class="table table-hover">
           <th scope="row"><%= i+=1 %></th>
-          <td><%= p.recipients %> </td>
+          <th scope="row"><%= p.email.user.email %></th>
+          <th scope="row"><%= p.subject %></th>
           <td><%= p.updated_at.strftime("%d %B,%Y %H:%M") %></td>
           <td><%= link_to "Lihat Pesan", email_user_path(p), class: 'btn btn-primary' %> 
           <%= button_to "Trash", email_user_path(p), method: :delete, class: 'btn btn-danger'  %> </td>

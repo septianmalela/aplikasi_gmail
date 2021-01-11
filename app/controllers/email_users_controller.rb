@@ -4,13 +4,10 @@ class EmailUsersController < ApplicationController
   skip_before_action :verify_authenticity_token
   
   def index
-  	@emails = EmailUser.where(recipients: current_user.email).where(status: 'inbox')
+  	@emails = current_user.email_users.inbox
   end
 
   def show
-    # @email = Email.joins(:post_attachments).select("emails.*, post_attachments.*")
-    # @emails = User.joins(emails: :email_users).select("emails.*, users.*, email_users.*").find(params[:id])
-    # @emails = Email.joins(:email_users).select("emails.*,email_users.*")
     @emails = EmailUser.find(params[:id])
     @email = @emails.email
     @user = @email.user

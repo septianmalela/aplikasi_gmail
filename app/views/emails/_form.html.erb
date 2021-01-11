@@ -1,9 +1,7 @@
 <%= form_with(model: @email, url: emails_path, :html => { :multipart => true }, method: :post) do |f| %>
 <div class="form-group">
-      <div class="input_fields_wrap">
-        <button class="add_field_button">Add More Email</button><br>
-          <%= f.text_field :recipients %>
-      </div>
+    <%= f.label :recipients %>
+    <%= f.text_field :recipients %>
 </div>
 
 <div class="form-group">

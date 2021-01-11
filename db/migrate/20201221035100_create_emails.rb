@@ -1,6 +1,7 @@
 class CreateEmails < ActiveRecord::Migration[6.1]
   def change
     create_table :emails do |t|
+      t.string :recipients
       t.string :subject
       t.text :message
       t.string :inbox

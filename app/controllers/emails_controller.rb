@@ -5,23 +5,11 @@ class EmailsController < ApplicationController
   before_action :set_delete, only: [:delete_draft]
 
   def sent
-    # @get = Email.joins(:email_users).where(email_users: { recipients: "yusup@gmail.com" })
-    # @sent = current_user.emails.sent
-    # @sent = Email.joins(:email_users).select("emails.*, email_users.*").sent
       @sent = current_user.emails.sent
   end
 
   def trash
-    a  = current_user.emails.trash
-    @trash = a
-    # @trashh = EmailUser.where(email_users: {status: 'trash'}) 
-    # @trash = current_user.emails.trash
-    # a = Email.where(:status => 'trash').pluck(:subject, :message, :status)
-    # b = EmailUser.where(:status => 'trash').pluck(:email_id, :recipients, :status)
-    # render :json =>  Email.select('id','subject','message','status','user_id').map(&:id,&:email_id,&:recipients,&:status)
-    # a = Email.select('id','subject','message','status','user_id', 'updated_at').from('emails').where(status: 'trash')
-    # b = EmailUser.select('id','email_id','recipients','status', 'updated_at').from('email_users').where(status: 'trash')
-    # @trash = a+b
+      @trash = current_user.emails.gabungan
   end
 
   def draft
@@ -31,7 +19,7 @@ class EmailsController < ApplicationController
   def new
     @email = Email.new
     @post_attachment = @email.post_attachments.build
-    @email.email_users.build
+    @email_users = @email.email_users.build
   end
 
   def show
@@ -43,7 +31,6 @@ class EmailsController < ApplicationController
   end
 
   def create
-    byebug
     @email = Email.new(email_params)
     @email.user = current_user
     @email.status = params[:commit]
@@ -113,8 +100,8 @@ class EmailsController < ApplicationController
   private
 
   def email_params
-    params.require(:email).permit(:subject, :message, post_attachments_attributes: 
-  [:id, :email_id, :attachment], email_users_attributes: [:id, :email_id, :recipients, :subject])
+    params.require(:email).permit(:recipients, :subject, :message, post_attachments_attributes: 
+  [:id, :email_id, :attachment], email_users_attributes: [:id, :email_id, :subject])
   end
 
   def set_trash

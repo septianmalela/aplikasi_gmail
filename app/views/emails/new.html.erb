@@ -1,30 +1,28 @@
-<%= form_with model: @email, :html => { :multipart => true } do |f| %><br>
-	<%= f.fields_for :email_users do |form| %>
-		<%= form.label :recipients %>
-		<%= form.email_field :recipients , class: 'form-control col-md-5' %>
-	<% end %><br>
+<%= form_with(model: @email, url: emails_path, :html => { :multipart => true }, method: :post) do |f| %>
+<div class="form-group">
+  <%= f.label :recipients %>
+  <%= f.text_field :recipients, class: 'form-control col-md-5' %>
+</div>
 
-	<div class="form-group">
-		<%= f.label :subject %>
-		<%= f.text_field :subject, class: 'form-control col-md-5' %>
-	</div><br>
+<div class="form-group">
+  <%= f.label :subject %>
+  <%= f.text_field :subject, class: 'form-control col-md-5' %>
+</div>
 
-	<div class="form-group">
-		<%= f.label :message %>
-		<%= f.text_area :message, rows: 10, class: 'form-control col-md-5' %>
-	</div><br>
-		
+<div class="form-group">
+  <%= f.label :message %>
+  <%= f.text_area :message, rows: 10, class: 'form-control col-md-5' %>
+</div>
 
-	<%= f.fields_for :post_attachments do |p| %>
-	     <div class="field">
-	       <%= p.label :attachment %><br>
-	       <%= p.file_field :attachment, :multiple => true, name: "post_attachments[attachment][]" %>
-	     </div>
-	   <% end %>
+<%= f.fields_for :post_attachments do |p| %>
+     <div class="field">
+       <%= p.label :attachment %><br>
+       <%= p.file_field :attachment, :multiple => true, name: "post_attachments[attachment][]" %>
+     </div>
+   <% end %>
 
-	<div class="form-group">
-		<%= f.submit "Kirim Pesan", value:'sent', class: 'btn btn-primary form-control col-md-2' %>
-		<%= f.submit "Simpan Ke Draft", value:'draft', class: 'btn btn-primary form-control col-md-2' %>
-	</div>
-
+<div class="form-group">
+  <%= f.submit "Kirim Pesan", value:'sent', class: 'btn btn-primary col-md-2' %>
+  <%= f.submit "draft", value:'draft', class: 'btn btn-primary col-md-2' %>
+</div>
 <% end %>

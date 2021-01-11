@@ -10,6 +10,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :avatar, presence: true
   has_many :emails
+  has_many :email_users
 
       default_scope { order({id: :desc}, :created_at) }
       scope :draft, -> { where(status: 'draft') }
